@@ -1,7 +1,7 @@
 cabal-version:      3.0
 name:               ppad-hkdf
 version:            0.1.0
-synopsis:           HMAC-based key derivation function
+synopsis:           A HMAC-based key derivation function
 license:            MIT
 license-file:       LICENSE
 author:             Jared Tobin

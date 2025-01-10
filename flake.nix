@@ -1,5 +1,5 @@
 {
-  description = "Pure Haskell HMAC-HKDF";
+  description = "A pure Haskell HKDF.";
 
   inputs = {
     ppad-sha256 = {
