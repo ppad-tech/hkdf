@@ -1,5 +1,9 @@
 # Changelog
 
+- 0.2.0 (2025-01-10)
+  * API change, opting for "derive" in place of "hkdf" to work more
+    smoothly with a import qualifier like "KDF".
+
 - 0.1.0 (2025-01-10)
   * Initial release, supporting a generic RFC5869 HKDF function.
 
