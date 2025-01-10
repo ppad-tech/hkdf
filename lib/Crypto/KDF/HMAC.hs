@@ -56,6 +56,7 @@ extract
 extract (HMACEnv hmac hashlen) salt@(BI.PS _ _ l) ikm
   | l == 0    = hmac (BS.replicate hashlen 0x00) ikm
   | otherwise = hmac salt ikm
+{-# INLINE extract #-}
 
 expand
   :: HMACEnv
@@ -73,6 +74,7 @@ expand (HMACEnv hmac hashlen) info (fi -> len) prk
       | otherwise =
           let nt = hmac prk (tl <> info <> BS.singleton (fi j))
           in  go (succ j) (t <> BSB.byteString nt) nt
+{-# INLINE expand #-}
 
 -- | HMAC-based key derivation function.
 --
