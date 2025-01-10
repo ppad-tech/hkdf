@@ -1,3 +1,4 @@
+{-# OPTIONS_HADDOCK prune #-}
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE ViewPatterns #-}
 
@@ -13,13 +14,11 @@
 module Crypto.KDF.HMAC (
     -- * HMAC-based KDF
     hkdf
+  , HMAC
 
-    -- * HKDF Internals
+    -- internals
   , extract
   , expand
-
-    -- internal types
-  , HMAC
   , HMACEnv
   ) where
 

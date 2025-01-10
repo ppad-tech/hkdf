@@ -12,7 +12,7 @@ A sample GHCi session:
   > -- supply your own HMAC function
   > import qualified Crypto.Hash.SHA256 as SHA256
   >
-  > -- derive a 32-byte key from your secret
+  > -- derive a 32-byte key from a secret
   > hkdf SHA256.hmac "my salt" "my optional info" 32 "my secret input"
   "\EM\232\v\140\202\230\f2:\221n\221\209\233\US\209>\174_!\138\255\\C\150\237^X\226\tt\252"
 ```
