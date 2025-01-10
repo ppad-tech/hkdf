@@ -65,13 +65,13 @@ expand
   -> BS.ByteString  -- ^ output keying material
 expand (HMACEnv hmac hashlen) info (fi -> len) prk
     | len > 255 * hashlen = error "ppad-hkdf (expand): invalid outlength"
-    | otherwise = BS.take len (go 0 mempty mempty)
+    | otherwise = BS.take len (go (1 :: Int) mempty mempty)
   where
     n = ceiling ((fi len :: Double) / (fi hashlen :: Double)) :: Int
     go !j t !tl
-      | j == fi n = BS.toStrict (BSB.toLazyByteString t)
+      | j > fi n = BS.toStrict (BSB.toLazyByteString t)
       | otherwise =
-          let nt = hmac prk (tl <> info <> BS.singleton j)
+          let nt = hmac prk (tl <> info <> BS.singleton (fi j))
           in  go (succ j) (t <> BSB.byteString nt) nt
 
 -- | HMAC-based key derivation function.
