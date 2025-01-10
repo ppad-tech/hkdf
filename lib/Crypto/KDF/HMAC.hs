@@ -13,7 +13,7 @@
 
 module Crypto.KDF.HMAC (
     -- * HMAC-based KDF
-    hkdf
+    derive
   , HMAC
 
     -- internals
@@ -75,22 +75,23 @@ expand (HMACEnv hmac hashlen) info (fi -> len) prk
           in  go (succ j) (t <> BSB.byteString nt) nt
 {-# INLINE expand #-}
 
--- | HMAC-based key derivation function.
+-- | Derive a key from a secret, via a HMAC-based key derivation
+--   function.
 --
 --   The /salt/ and /info/ arguments are optional to the KDF, and may
 --   be simply passed as 'mempty'. An empty salt will be replaced by
 --   /hashlen/ zero bytes.
 --
 --   >>> import qualified Crypto.Hash.SHA256 as SHA256
---   >>> hkdf SHA256.hmac "my public salt" mempty 64 "my secret input"
+--   >>> derive SHA256.hmac "my public salt" mempty 64 "my secret input"
 --   <64-byte output keying material>
-hkdf
+derive
   :: HMAC          -- ^ HMAC function
   -> BS.ByteString -- ^ salt
   -> BS.ByteString -- ^ optional context and application-specific info
   -> Word64        -- ^ bytelength of output keying material (<= 255 * hashlen)
   -> BS.ByteString -- ^ input keying material
   -> BS.ByteString -- ^ output keying material
-hkdf hmac salt info len = expand env info len . extract env salt where
+derive hmac salt info len = expand env info len . extract env salt where
   env = HMACEnv hmac (fi (BS.length (hmac mempty mempty)))
 

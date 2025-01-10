@@ -9,11 +9,14 @@ A sample GHCi session:
 
 ```
   > :set -XOverloadedStrings
+  > -- import qualified
+  > import qualified Crypto.KDF.HMAC as KDF
+  >
   > -- supply your own HMAC function
   > import qualified Crypto.Hash.SHA256 as SHA256
   >
   > -- derive a 32-byte key from a secret
-  > hkdf SHA256.hmac "my salt" "my optional info" 32 "my secret input"
+  > KDF.derive SHA256.hmac "my salt" "my optional info" 32 "my secret input"
   "\EM\232\v\140\202\230\f2:\221n\221\209\233\US\209>\174_!\138\255\\C\150\237^X\226\tt\252"
 ```
 
@@ -31,14 +34,14 @@ Current benchmark figures on my mid-2020 MacBook Air look like (use
 `cabal bench` to run the benchmark suite):
 
 ```
-  benchmarking ppad-hkdf/HKDF-SHA256/32
+  benchmarking ppad-hkdf/HKDF-SHA256/derive (outlen 32)
   time                 12.69 μs   (12.58 μs .. 12.84 μs)
                        0.999 R²   (0.999 R² .. 1.000 R²)
   mean                 12.82 μs   (12.75 μs .. 12.89 μs)
   std dev              231.0 ns   (190.1 ns .. 299.9 ns)
   variance introduced by outliers: 16% (moderately inflated)
 
-  benchmarking ppad-hkdf/HKDF-SHA512/32
+  benchmarking ppad-hkdf/HKDF-SHA512/derive (outlen 32)
   time                 12.24 μs   (12.16 μs .. 12.31 μs)
                        1.000 R²   (1.000 R² .. 1.000 R²)
   mean                 12.27 μs   (12.22 μs .. 12.32 μs)
