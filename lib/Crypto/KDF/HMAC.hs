@@ -12,9 +12,11 @@
 -- [RFC5869](https://datatracker.ietf.org/doc/html/rfc5869).
 
 module Crypto.KDF.HMAC (
+    -- * HMAC synonym
+    HMAC
+
     -- * HMAC-based KDF
-    derive
-  , HMAC
+  , derive
 
     -- internals
   , extract
@@ -40,6 +42,8 @@ fi = fromIntegral
 --   >>> import qualified Crypto.Hash.SHA256 as SHA256
 --   >>> :t SHA256.hmac
 --   SHA256.hmac :: BS.ByteString -> BS.ByteString -> BS.ByteString
+--   >>> SHA256.hmac "my HMAC key" "my HMAC input"
+--   <256-bit MAC>
 type HMAC = BS.ByteString -> BS.ByteString -> BS.ByteString
 
 -- HMAC function and its associated outlength
