@@ -11,11 +11,13 @@
       type = "git";
       url  = "git://git.ppad.tech/sha256.git";
       ref  = "master";
+      inputs.ppad-nixpkgs.follows = "ppad-nixpkgs";
     };
     ppad-sha512 = {
       type = "git";
       url  = "git://git.ppad.tech/sha512.git";
       ref  = "master";
+      inputs.ppad-nixpkgs.follows = "ppad-nixpkgs";
     };
     flake-utils.follows = "ppad-nixpkgs/flake-utils";
     nixpkgs.follows = "ppad-nixpkgs/nixpkgs";
