@@ -27,7 +27,7 @@
             , ppad-sha256, ppad-sha512 }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        lib = "ppad-hmac-hkdf";
+        lib = "ppad-hkdf";
 
         pkgs = import nixpkgs { inherit system; };
         hlib = pkgs.haskell.lib;
