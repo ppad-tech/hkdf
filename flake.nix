@@ -2,6 +2,11 @@
   description = "A pure Haskell HKDF.";
 
   inputs = {
+    ppad-nixpkgs = {
+      type = "git";
+      url  = "git://git.ppad.tech/nixpkgs.git";
+      ref  = "master";
+    };
     ppad-sha256 = {
       type = "git";
       url  = "git://git.ppad.tech/sha256.git";
@@ -12,11 +17,11 @@
       url  = "git://git.ppad.tech/sha512.git";
       ref  = "master";
     };
-    flake-utils.follows = "ppad-sha256/flake-utils";
-    nixpkgs.follows = "ppad-sha256/nixpkgs";
+    flake-utils.follows = "ppad-nixpkgs/flake-utils";
+    nixpkgs.follows = "ppad-nixpkgs/nixpkgs";
   };
 
-  outputs = { self, nixpkgs, flake-utils
+  outputs = { self, nixpkgs, flake-utils, ppad-nixpkgs
             , ppad-sha256, ppad-sha512 }:
     flake-utils.lib.eachDefaultSystem (system:
       let
