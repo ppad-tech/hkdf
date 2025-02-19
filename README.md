@@ -1,10 +1,10 @@
 # ppad-hkdf
 
-A HMAC-based key derivation function (HKDF) per
-[RFC5869](https://datatracker.ietf.org/doc/html/rfc5869).
-
 [![](https://img.shields.io/hackage/v/ppad-hkdf?color=blue)](https://hackage.haskell.org/package/ppad-hkdf)
 ![](https://img.shields.io/badge/license-MIT-brightgreen)
+
+A HMAC-based key derivation function (HKDF) per
+[RFC5869](https://datatracker.ietf.org/doc/html/rfc5869).
 
 ## Usage
 
