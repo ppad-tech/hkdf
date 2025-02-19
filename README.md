@@ -1,4 +1,4 @@
-# ppad-hkdf
+# hkdf
 
 [![](https://img.shields.io/hackage/v/ppad-hkdf?color=blue)](https://hackage.haskell.org/package/ppad-hkdf)
 ![](https://img.shields.io/badge/license-MIT-brightgreen)
