@@ -48,7 +48,9 @@ data HkdfTest = HkdfTest {
   } deriving Show
 
 decodehex :: T.Text -> BS.ByteString
-decodehex = B16.decodeLenient . TE.encodeUtf8
+decodehex t = case B16.decode (TE.encodeUtf8 t) of
+  Nothing -> error "bang"
+  Just bs -> bs
 
 instance A.FromJSON HkdfTest where
   parseJSON = A.withObject "HkdfTest" $ \m -> HkdfTest

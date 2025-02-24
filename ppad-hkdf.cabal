@@ -43,8 +43,8 @@ test-suite hkdf-tests
   build-depends:
       aeson
     , base
-    , base16-bytestring
     , bytestring
+    , ppad-base16
     , ppad-hkdf
     , ppad-sha256
     , ppad-sha512
