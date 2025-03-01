@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/hackage/v/ppad-hkdf?color=blue)](https://hackage.haskell.org/package/ppad-hkdf)
 ![](https://img.shields.io/badge/license-MIT-brightgreen)
+[![](https://img.shields.io/badge/haddock-hkdf-lightblue)](https://docs.ppad.tech/hkdf)
 
 A HMAC-based key derivation function (HKDF) per
 [RFC5869](https://datatracker.ietf.org/doc/html/rfc5869).
