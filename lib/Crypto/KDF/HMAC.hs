@@ -66,10 +66,10 @@ expand
   -> BS.ByteString  -- ^ optional context and application-specific info
   -> Word64         -- ^ bytelength of output keying material
   -> BS.ByteString  -- ^ pseudorandom key
-  -> BS.ByteString  -- ^ output keying material
+  -> Maybe BS.ByteString  -- ^ output keying material
 expand (HMACEnv hmac hashlen) info (fi -> len) prk
-    | len > 255 * hashlen = error "ppad-hkdf (expand): invalid outlength"
-    | otherwise = BS.take len (go (1 :: Int) mempty mempty)
+    | len > 255 * hashlen = Nothing
+    | otherwise = pure (BS.take len (go (1 :: Int) mempty mempty))
   where
     n = ceiling ((fi len :: Double) / (fi hashlen :: Double)) :: Int
     go !j t !tl
@@ -95,7 +95,7 @@ derive
   -> BS.ByteString -- ^ optional context and application-specific info
   -> Word64        -- ^ bytelength of output keying material (<= 255 * hashlen)
   -> BS.ByteString -- ^ input keying material
-  -> BS.ByteString -- ^ output keying material
+  -> Maybe BS.ByteString -- ^ output keying material
 derive hmac salt info len = expand env info len . extract env salt where
   env = HMACEnv hmac (fi (BS.length (hmac mempty mempty)))
 

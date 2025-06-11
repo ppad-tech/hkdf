@@ -3,11 +3,9 @@
 
 module Main where
 
-import Control.Exception
 import qualified Crypto.Hash.SHA256 as SHA256
 import qualified Crypto.Hash.SHA512 as SHA512
 import qualified Crypto.KDF.HMAC as KDF
-import qualified Data.ByteString as BS
 import qualified Data.Aeson as A
 import qualified Data.Text.IO as TIO
 import Test.Tasty
@@ -50,16 +48,13 @@ execute h W.HkdfTest {..} = testCase t_msg $ do
         inf = ht_info
         siz = ht_size
         pec = ht_okm
-    if   ht_result == "invalid"
-    then do
-      out <- try (pure $! KDF.derive hmac sal inf siz ikm)
-               :: IO (Either ErrorCall BS.ByteString)
-      case out of
-        Left _  -> assertBool "invalid" True
-        Right o -> assertBool "invalid" (pec /= o)
-    else do
-      let out = KDF.derive hmac sal inf siz ikm
-      assertEqual mempty pec out
+    case KDF.derive hmac sal inf siz ikm of
+      Nothing
+        | ht_result == "invalid" -> assertBool "invalid" True
+        | otherwise -> assertFailure "failed"
+      Just out
+        | ht_result == "invalid" -> assertBool "invalid" (pec /= out)
+        | otherwise -> assertEqual mempty pec out
   where
     hmac = case h of
       SHA256 -> SHA256.hmac
