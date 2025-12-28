@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               ppad-hkdf
-version:            0.3.0
+version:            0.3.1
 synopsis:           A HMAC-based key derivation function
 license:            MIT
 license-file:       LICENSE
@@ -8,11 +8,16 @@ author:             Jared Tobin
 maintainer:         jared@ppad.tech
 category:           Cryptography
 build-type:         Simple
-tested-with:        GHC == { 9.8.1 }
+tested-with:        GHC == 9.10.3
 extra-doc-files:    CHANGELOG
 description:
   A pure implementation of the HMAC-based extract-and-expand key derivation
   function, per RFC5869.
+
+flag llvm
+  description: Use GHC's LLVM backend.
+  default:     False
+  manual:      True
 
 source-repository head
   type:     git
@@ -23,6 +28,8 @@ library
   hs-source-dirs:   lib
   ghc-options:
       -Wall
+  if flag(llvm)
+    ghc-options: -fllvm -O2
   exposed-modules:
       Crypto.KDF.HMAC
   build-depends:
