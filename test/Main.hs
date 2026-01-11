@@ -56,8 +56,8 @@ execute h W.HkdfTest {..} = testCase t_msg $ do
         | ht_result == "invalid" -> assertBool "invalid" (pec /= out)
         | otherwise -> assertEqual mempty pec out
   where
-    hmac = case h of
-      SHA256 -> SHA256.hmac
-      SHA512 -> SHA512.hmac
+    hmac k b = case h of
+      SHA256 -> let SHA256.MAC mac = SHA256.hmac k b in mac
+      SHA512 -> let SHA512.MAC mac = SHA512.hmac k b in mac
     t_msg = "test " <> show ht_tcId -- XX embellish
 
