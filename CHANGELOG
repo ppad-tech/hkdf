@@ -1,5 +1,9 @@
 # Changelog
 
+- 0.3.2 (2026-01-11)
+  * Bumps the ppad-sha{256,512} dependencies used in the test and benchmark
+    suites.
+
 - 0.3.1 (2025-12-28)
   * Adds an 'llvm' build flag and tests with GHC 9.10.3.
 
